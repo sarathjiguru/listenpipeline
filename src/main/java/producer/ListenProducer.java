@@ -1,7 +1,6 @@
 package producer;
 
 import org.apache.kafka.clients.producer.KafkaProducer;
-import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
 
@@ -9,14 +8,13 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Properties;
-import java.util.function.Consumer;
 import java.util.stream.Stream;
 
-public class ProduceTo {
+public class ListenProducer {
 
     private final KafkaProducer<String, String> listenProducer;
 
-    public ProduceTo() {
+    public ListenProducer() {
         Properties producerProps = new Properties();
         producerProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
         producerProps.put("acks", "all");
@@ -47,7 +45,8 @@ public class ProduceTo {
         //TODO: also show idempotent and transactional producerstext-stream
         //TODO: Get properties from a config manager file
         //TODO: if a producer should be halted; restart it again
-        ProduceTo p = new ProduceTo();
+        ListenProducer p = new ListenProducer();
+
 
         //simulate: read a file and send its content to kafka
         try (Stream<String> lines = Files.lines(Paths.get("C:\\Users\\sarath chandra\\Desktop\\books\\madling\\MovieSummaries\\plot_summaries.txt"))
