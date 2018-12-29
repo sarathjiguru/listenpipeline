@@ -14,11 +14,11 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class ListenFrom {
+public class ListenConsumer {
     private final Properties consumerProps;
     private final Jedis j;
 
-    public ListenFrom() {
+    public ListenConsumer() {
         //TODO: move properties to a file; Get details from command prompt
         //TODO: Demonstrate how consumer groups work
         //TODO: Demonstrate how publish-subscribe model works
@@ -36,8 +36,8 @@ public class ListenFrom {
     }
 
     public static void main(String args[]) throws IOException {
-        ListenFrom l = new ListenFrom();
-        //listen-consumer is not thread-safe
+        ListenConsumer l = new ListenConsumer();
+        //KafkaConsumer is not thread-safe
         KafkaConsumer<String, String> listenConsumer = new KafkaConsumer<>(l.consumerProps);
         listenConsumer.subscribe(Arrays.asList("voice"));
 
